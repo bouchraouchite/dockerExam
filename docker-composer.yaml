@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0.28
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: bouchra
+      MYSQL_PASSWORD: 
+
+  backend:
+    image: matouz/tuto_backend:1.0.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: bouchra
+      DB_PASSWORD: 
+      DB_NAME: testdb
+
+  frontend:
+    image: matouz/tuto_front-end:1.0.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_BACKEND_URL: http://backend:8080
+
