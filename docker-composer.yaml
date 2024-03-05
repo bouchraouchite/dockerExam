@@ -13,7 +13,7 @@ services:
   backend:
     image: matouz/tuto_backend:1.0.0
     ports:
-      - "8080:8080"
+      - "8080:2222"
     depends_on:
       - mysql
     environment:
